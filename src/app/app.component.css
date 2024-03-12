@@ -1,0 +1,104 @@
+@font-face {
+    font-family: "Montserrat";
+    src:
+      /* Modern Browsers */ url("/assets/fonts/Montserrat-VariableFont_wght.ttf") format("truetype"),
+
+  }
+
+  @font-face {
+    font-family: 'DINNextW1G';
+    src: url('/assets/fonts/dinnextDINNextW1G-Black.otf') format('opentype');
+    font-weight: 900; /* Black */
+  }
+  
+  @font-face {
+    font-family: 'DINNextW1G';
+    src: url('/assets/fonts/dinnextDINNextW1G-BlackItalic.otf') format('opentype');
+    font-weight: 900; /* Black */
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'DINNextW1G';
+    src: url('/assets/fonts/dinnextDINNextW1G-Bold.otf') format('opentype');
+    font-weight: bold;
+  }
+  
+  @font-face {
+    font-family: 'DINNextW1G';
+    src: url('/assets/fonts/dinnextDINNextW1G-BoldItalic.otf') format('opentype');
+    font-weight: bold;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'DINNextW1G';
+    src: url('/assets/fonts/dinnextDINNextW1G-Heavy.otf') format('opentype');
+    font-weight: 800; /* Heavy */
+  }
+  
+  @font-face {
+    font-family: 'DINNextW1G';
+    src: url('/assets/fonts/dinnextDINNextW1G-HeavyItalic.otf') format('opentype');
+    font-weight: 800; /* Heavy */
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'DINNextW1G';
+    src: url('/assets/fonts/dinnextDINNextW1G-Italic.otf') format('opentype');
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'DINNextW1G';
+    src: url('/assets/fonts/dinnextDINNextW1G-Light.otf') format('opentype');
+    font-weight: 300; /* Light */
+  }
+  
+  @font-face {
+    font-family: 'DINNextW1G';
+    src: url('/assets/fonts/dinnextDINNextW1G-LightItalic.otf') format('opentype');
+    font-weight: 300; /* Light */
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'DINNextW1G';
+    src: url('/assets/fonts/dinnextDINNextW1G-Medium.otf') format('opentype');
+    font-weight: 500; /* Medium */
+  }
+  
+  @font-face {
+    font-family: 'DINNextW1G';
+    src: url('/assets/fonts/dinnextDINNextW1G-MediumItalic.otf') format('opentype');
+    font-weight: 500; /* Medium */
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'DINNextW1G';
+    src: url('/assets/fonts/dinnextDINNextW1G-Regular.otf') format('opentype');
+  }
+  
+  @font-face {
+    font-family: 'DINNextW1G';
+    src: url('/assets/fonts/dinnextDINNextW1G-UltraLight.otf') format('opentype');
+    font-weight: 200; /* Ultra-Light */
+  }
+  
+  @font-face {
+    font-family: 'DINNextW1G';
+    src: url('/assets/fonts/dinnextDINNextW1G-UltraLightIt.otf') format('opentype');
+    font-weight: 200; /* Ultra-Light */
+    font-style: italic;
+  }
+
+body, html{
+    background-color: #121212 !important;
+    /* height: 100%;
+    width: 100%;
+    position: fixed; */
+    font-family: 'Montserrat', sans-serif;
+    /* z-index: -1; */
+}

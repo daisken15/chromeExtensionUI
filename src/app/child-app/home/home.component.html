@@ -1,0 +1,132 @@
+
+<div class="main-body">
+  <ng-container *ngIf="token">
+    <h3 class="username">Hello {{username}}</h3>
+    <h5 class="title">Subreddit name: <br> 
+      <span style="text-decoration: underline;">
+        r/{{expectedValue}}
+      </span>
+    
+    </h5>
+  
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button class="nav-link active bg-success" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">General notes</button>
+        <button class="nav-link bg-success" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Your notes</button>
+        <button class="nav-link bg-success" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Discussions</button>
+        <button class="nav-link bg-success" id="nav-settings-tab" data-bs-toggle="tab" data-bs-target="#nav-settings" type="button" role="tab" aria-controls="nav-settings" aria-selected="false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+            <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
+            <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div class="panel-contents">
+          
+          <div class="header">
+            <h1>General Notes to this sub   <button *ngIf="userlevel == 1" type="button" (click)="toggleNewNotes()" class="btn btn-success addmore">Add new</button></h1>
+          
+          </div>
+          <ul> 
+           
+            <div class="content-body">
+              <div class="addnewContainer" *ngIf="addnewToggle" >
+                <textarea [(ngModel)]="addnewNotes" placeholder="Add new notes..." class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <button type="button" class="btn btn-primary btn-sm"(click)="addnewNotesSave(1)">Save</button>
+                <button type="button" class="btn btn-secondary btn-sm" (click)="toggleNewNotes()">Cancel</button>
+              </div>
+              <ng-container *ngFor="let items of noteItems; let i = index">
+                <li *ngIf="items.category" [attr.toggle]="'g'+ i" class=""><a>
+                <img src="https://i.ibb.co/jJRcvRr/bandmember.jpg" alt="bandmember" >
+                  <h1>
+                    <ng-container *ngIf="items.username == null">
+                      Admin
+                    </ng-container>
+                    {{items.username}}
+                    <span class="badge badge-pill badge-info bg-info" *ngIf="userlevel == 1" (click)="toggleEditMode('g'+ i)">Edit</span>&nbsp;
+                    <span class="badge badge-pill badge-info bg-danger" *ngIf="userlevel == 1" id="{{items.postUUID}}"(click)="deleteNotes(items.postUUID)">Delete</span>
+                  </h1> 
+                  <p>{{items.notes}} </p>
+                </a></li>
+                <div class="form-group editable hide" [attr.toggle]="'g'+ i">
+                  <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Edit notes</label>
+                    <textarea [(ngModel)]="items.notes" placeholder="{{items.notes}}" class="form-control" id="textArea{{i}}" rows="3"></textarea>
+                  </div>
+                  <!-- <input type="text" class="form-control" [(ngModel)]="items.notes" placeholder="{{items.notes}}"> -->
+                  <button type="button" class="btn btn-primary btn-sm" (click)="saveEditedData('textArea'+ i, items.postUUID , items.notes)">Save</button>
+                  <button type="button" class="btn btn-secondary btn-sm" (click)="toggleEditMode('g'+ i)">Cancel</button>
+                </div>
+                </ng-container>
+              </div>
+          </ul>
+          
+        </div>
+       
+      </div>
+      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <div class="panel-contents">
+          <div class="header">
+            <h1>Your Notes to this sub   <button type="button" (click)="toggleNewNotes1()" class="btn btn-success addmore">Add new</button></h1>
+          </div>
+          <div class="addnewContainer" *ngIf="addnewToggle1" >
+            <textarea [(ngModel)]="addnewNotes" placeholder="Add new notes..." class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <button type="button" class="btn btn-primary btn-sm"(click)="addnewNotesSave(0)">Save</button>
+            <button type="button" class="btn btn-secondary btn-sm" (click)="toggleNewNotes1()">Cancel</button>
+          </div>
+          <ul> 
+           
+
+            <ng-container *ngFor="let items of noteItemsUserOnly; let i = index">
+              <li *ngIf="items.category" [attr.toggle]="'g'+ i" class=""><a>
+              <img src="https://i.ibb.co/jJRcvRr/bandmember.jpg" alt="bandmember" >
+                <h1>
+                  <ng-container *ngIf="items.username == null">
+                    Admin
+                  </ng-container>
+                  {{items.username}}
+                  <span class="badge badge-pill badge-info bg-info" (click)="toggleEditMode('g'+ i)">Edit</span>&nbsp;
+                  <span class="badge badge-pill badge-info bg-danger" id="{{items.postUUID}}"(click)="deleteNotes(items.postUUID)">Delete</span>
+                </h1> 
+                <p>{{items.notes}} </p>
+              </a></li>
+              <div class="form-group editable hide" [attr.toggle]="'g'+ i">
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1">Edit notes</label>
+                  <textarea [(ngModel)]="items.notes" placeholder="{{items.notes}}" class="form-control" id="textArea{{i}}" rows="3"></textarea>
+                </div>
+                <!-- <input type="text" class="form-control" [(ngModel)]="items.notes" placeholder="{{items.notes}}"> -->
+                <button type="button" class="btn btn-primary btn-sm" (click)="saveEditedData('textArea'+ i, items.postUUID, items.notes)">Save</button>
+                <button type="button" class="btn btn-secondary btn-sm" (click)="toggleEditMode('g'+ i)">Cancel</button>
+              </div>
+              </ng-container>
+
+
+
+             
+
+          
+          </ul>
+          
+        </div>
+
+      </div>
+      <div class="tab-pane fade"             id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+      <div class="tab-pane fade"             id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
+
+        <h1 (click)="removeFromSessionStorage()">Sign out</h1>
+
+      </div>
+    </div>
+  </ng-container>
+  
+  <ng-container *ngIf="!token">
+  
+  <h1>PLEASE LOGIN FIRST!!</h1>
+  </ng-container>
+  
+</div>
+
